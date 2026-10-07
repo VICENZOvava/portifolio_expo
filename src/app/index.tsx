@@ -1,98 +1,67 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+export default function HomeScreen(){
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
+    <View style={styles.container}> 
+      <Text style={styles.titulo}>Vicenzo Vieira Varandas</Text>
+        <Image
+          source={{uri: 'https://raw.githubusercontent.com/VICENZOvava/VICENZOvava.github.io/refs/heads/main/VicenzoF.jpg'}}
+          style={styles.imagem} />
 
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
+             <Text style={styles.subtitulo}>
+              - Cursando Ensino Médio Técnico em Desenvolvimento de Sistemas
+              </Text> 
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => Linking.openURL('https://github.com/VICENZOvava')}
+      >
+        <Text style={styles.buttonText}>Github</Text>
+      </TouchableOpacity>
 
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    backgroundColor: '#1E1E1E',
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 24,
   },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+  titulo: {
+    color: '#FFFFFF',
+    fontSize: 32,
+    fontWeight: 'bold',
+    marginBottom: 20,
   },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+  imagem: {
+    borderRadius: 20,
+    width: 300,
+    height: 400,
+    marginBottom: 20,
   },
-  title: {
+  subtitulo: {
+    color: '#fff',
+    fontSize: 18,
+    lineHeight: 26,
+    marginBottom: 10,
     textAlign: 'center',
   },
-  code: {
-    textTransform: 'uppercase',
+  button: {
+    backgroundColor: '#666161',
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 12,
+    elevation: 5,
+    marginBottom: 20,
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+    buttonText: {
+    color: '#1E1E1E',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
-});
+
+})
